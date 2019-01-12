@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+    <meta name="description" content="Calculate classical orbital elements from position and velocity vectors, in relative units (DU and TU). Quick-sketch an idea of the orbit. ">
+    <meta name="author" content="Joshua Ma">
+
+    <title>Orbital Elements</title>
+	
+	<!-- Bootstrap core CSS --> 
+    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+	<!-- Custom CSS --> 
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href='javascript:$("#wrapper").toggleClass("toggled");'>
+                        Close
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Orbital Elements</a>
+                </li>
+                <li>
+                    <a href="#">Gibbs Method</a>
+                </li>
+                <li>
+                    <a href="#">Coplanar Circles</a>
+                </li>
+				<li>
+                    <a href="#">Long Numbers</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper fill-height">
+            <div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-6 b-r">
+					
+						<p></p>
+						<h1>Orbital Elements</h1>
+						<p></p>
+						
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="input-group">
+									<span class="input-group-addon">$\mathtt{r}$</span> 
+									<input class="inputs form-control" type="text"> 
+									<span class="input-group-btn" style="width:0px">
+									</span> <input class="inputs form-control" type="text"> 
+									<span class="input-group-btn" style="width:0px"></span> 
+									<input class="inputs form-control" type="text">
+								</div>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="input-group">
+									<span class="input-group-addon">$\mathtt{v}$</span> 
+									<input class="inputs form-control" type="text"> 
+									<span class="input-group-btn" style="width:0px"></span> 
+									<input class="inputs form-control" type="text"> 
+									<span class="input-group-btn" style="width:0px"></span> 
+									<input class="inputs form-control" type="text">
+								</div>
+							</div>
+						</div>
+						
+						<div class="row text-center">
+							<div class="col-sm-12">
+								<div class="results">
+								</div>
+							</div>
+						</div>
+						
+						<p></p>
+						<a href="#menu-toggle" class="btn btn-secondary btn-margin" id="menu-toggle">Toggle Menu</a>
+						<a href="#" class="btn btn-primary btn-margin" id="try-inputs">Try Inputs</a>
+						<a href="#" class="btn btn-danger btn-margin" id="clear">Clear</a>
+						<a href="#" class="btn btn-info btn-margin" id="options" data-toggle="modal" data-target="#optionsModal">Options</a>
+						<p></p>
+					</div>
+					<div class="col-lg-6 b-r">
+						<div id="canvas"></div>
+					</div>
+				</div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+	
+	<!-- Modal -->
+	<div class="modal fade" id="optionsModal" tabindex="-1" role="dialog" aria-labelledby="optionsModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="optionsModalLabel">Options</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>Decimal Places: </p>
+					<div data-toggle="buttons">
+						<label class="btn btn-outline-secondary"><input type="radio" name="options" value="0" autocomplete="off">0</label>
+						<label class="btn btn-outline-secondary"><input type="radio" name="options" value="1" autocomplete="off">1</label>
+						<label class="btn btn-outline-secondary"><input type="radio" name="options" value="2" autocomplete="off">2</label>
+						<label class="btn btn-outline-secondary"><input type="radio" name="options" value="3" autocomplete="off">3</label>
+						<label class="btn btn-outline-secondary active"><input type="radio" name="options" value="4" autocomplete="off" checked>4</label>
+						<label class="btn btn-outline-secondary"><input type="radio" name="options" value="5" autocomplete="off">5</label>
+						<label class="btn btn-outline-secondary"><input type="radio" name="options" value="6" autocomplete="off">6</label>
+						<label class="btn btn-outline-secondary"><input type="radio" name="options" value="7" autocomplete="off">7</label>
+						<label class="btn btn-outline-secondary"><input type="radio" name="options" value="8" autocomplete="off">8</label>
+						<label class="btn btn-outline-secondary"><input type="radio" name="options" value="9" autocomplete="off">9</label>
+						<label class="btn btn-outline-secondary"><input type="radio" name="options" value="10" autocomplete="off">10</label>
+						<label class="btn btn-outline-secondary"><input type="radio" name="options" value="11" autocomplete="off">11</label>
+						<label class="btn btn-outline-secondary"><input type="radio" name="options" value="12" autocomplete="off">12</label>
+						<label class="btn btn-outline-secondary"><input type="radio" name="options" value="13" autocomplete="off">13</label>
+						<label class="btn btn-outline-secondary"><input type="radio" name="options" value="14" autocomplete="off">14</label>
+						<label class="btn btn-outline-secondary"><input type="radio" name="options" value="15" autocomplete="off">15</label>
+					</div>
+					<p>Show the following: </p>
+					<div data-toggle="buttons">
+						<label class="btn btn-outline-secondary"><input type="checkbox" autocomplete="off">Equations</label>
+						<label class="btn btn-outline-secondary names"><input type="checkbox" autocomplete="off">Names</label>
+						<label class="btn btn-outline-secondary annotations"><input type="checkbox" autocomplete="off">Annotations</label>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /#modal -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	
+	<!-- Custom JavaScript -->
+    <script src="self/orbital-elements.js"></script>
+    <script src="self/orbit.js"></script>
+	
+	<!-- Math packages --> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.13.3/math.min.js"></script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script> 
+	<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({
+		tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]},
+		"HTML-CSS": {linebreaks:{automatic:true,width:"container"}}
+	});
+	</script> 
+	
+	<!-- three.js components --> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/85/three.min.js"></script> 
+	<script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script> 
+	<script src="https://threejs.org/examples/js/renderers/Projector.js"></script> 
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+		e.stopPropagation();
+        $("#wrapper").toggleClass("toggled");
+
+		$('html').click(function() {
+			if($('#wrapper').hasClass("toggled")) {
+				$("#wrapper").toggleClass("toggled");
+			}
+		});
+
+		$('#sidebar-wrapper').click(function(event){
+			event.stopPropagation();
+		});
+		
+		/*
+		 * The code below does not seem to work with my mobile browser, 
+		 * so I decided for stopPropagation() albeit its noted risks: 
+		 *
+		
+		$(document).click(function(event) { 
+			if(!$(event.target).closest('#sidebar-wrapper').length) {
+				if($('#sidebar-wrapper').is(":visible")) {
+            		if($('#wrapper').hasClass("toggled")) {
+						$("#wrapper").toggleClass("toggled");
+					}
+				}
+			}        
+		});
+		
+		 *
+		 */
+    });
+
+    </script>
+	
+	<!-- Try Inputs Script --> 
+	<script>
+    $("#try-inputs").click(function() {
+		$('.inputs').eq(0).val('3*sqrt(3)/4');
+		$('.inputs').eq(1).val('3/4');
+		$('.inputs').eq(2).val('0');
+		$('.inputs').eq(3).val('-1/(2*sqrt(2))');
+		$('.inputs').eq(4).val('sqrt(3)/(2*sqrt(2))');
+		$('.inputs').eq(5).val('1/sqrt(2)');
+		orbitalElements();
+		orbit();
+    });
+    </script>
+	
+	<!-- Clear Script --> 
+	<script>
+    $("#clear").click(function() {
+        $('.inputs:lt(6)').val('');
+		$('.results').eq(0).empty();
+		$('#canvas').empty();
+    });
+    </script>
+	
+	<!-- Script Script --> 
+	<script> 
+	$('.inputs:lt(5)').keydown(function(key) {
+		if (key.which === 13) {
+			var index = $('.inputs').index(this) + 1;
+			$('.inputs').eq(index).select();
+		}
+	});
+
+	$('.inputs:lt(6)').keyup(function() {
+		if ($('.inputs:lt(6)').filter(function() {return $.trim($(this).val()).length === 0}).length == 0) {
+			orbitalElements();
+			orbit();
+		}
+	});
+	</script> 
+	
+	<!-- (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ --> 
+	<script> 
+	$('input[name=options],input[type=checkbox]').on("change", function() { 
+		if ($('.inputs:lt(6)').filter(function() {return $.trim($(this).val()).length === 0}).length == 0) {
+			orbitalElements();
+		} 
+	});
+	</script> 
+	
+	<!-- https://stackoverflow.com/questions/10086693/jquery-resize-on-div-element -->
+	<script>
+	$.event.special.widthChanged = {
+        remove: function() {
+            $(this).children('iframe.width-changed').remove();
+        },
+        add: function () {
+            var elm = $(this);
+            var iframe = elm.children('iframe.width-changed');
+            if (!iframe.length) {
+                iframe = $('<iframe/>').addClass('width-changed').prependTo(this);
+            }
+            var oldWidth = elm.width();
+            function elmResized() {
+                var width = elm.width();
+                if (oldWidth != width) {
+                    elm.trigger('widthChanged', [width, oldWidth]);
+                    oldWidth = width;
+                }
+            }
+
+            var timer = 0;
+            var ielm = iframe[0];
+            (ielm.contentWindow || ielm).onresize = function() {
+                clearTimeout(timer);
+                timer = setTimeout(elmResized, 20);
+            };
+        }
+    }
+	</script>
+
+</body>
+
+</html>
