@@ -17,8 +17,7 @@
             if ( /(iPad|iPhone|iPod)/g.test( navigator.userAgent ) ) {
 
                 viewer.style.width = getComputedStyle( viewer ).width;
-		    window.alert(getComputedStyle( viewer ).height);
-                viewer.style.height = getComputedStyle( viewer ).height + 5;
+                viewer.style.height = getComputedStyle( viewer ).height;
                 viewer.setAttribute( 'scrolling', 'no' );
                 
             }
