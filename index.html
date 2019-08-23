@@ -11,15 +11,13 @@
         window.onload = function() {
             
             var viewer = document.getElementById( 'viewer' );
-            console.log(viewer);
-            console.log(navigator.userAgent);
             
             // iOS iframe auto-resize workaround
             
             if ( /(iPad|iPhone|iPod)/g.test( navigator.userAgent ) ) {
-                console.log('lalala');
+
                 viewer.style.width = getComputedStyle( viewer ).width;
-                viewer.style.height = getComputedStyle( viewer ).height;
+                viewer.style.height = getComputedStyle( viewer ).height+500px;
                 viewer.setAttribute( 'scrolling', 'no' );
                 
             }
